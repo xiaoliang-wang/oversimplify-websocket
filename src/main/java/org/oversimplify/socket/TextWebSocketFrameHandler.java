@@ -124,9 +124,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
         }
         for (ChannelInfo channelInfo : channelInfoList){
             if(channelInfo.getChannelId().equals(ctx.channel().id())){
-                channelInfoList.remove(channelInfo);
-                if(channelInfoList.isEmpty()){
-                    userChannelMap.remove(requestInfo.getUserId());
+                synchronized (this){
+                    channelInfoList.remove(channelInfo);
+                    if(channelInfoList.isEmpty()){
+                        userChannelMap.remove(requestInfo.getUserId());
+                    }
                 }
                 socketEvent.offLater(businessEvent,requestInfo.getUserId(), ctx.channel().id());
                 return;
