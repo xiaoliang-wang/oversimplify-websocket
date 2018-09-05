@@ -2,7 +2,7 @@
 
 # 项目介绍
 
-    基于netty实现websocket服务框架，深度封装使用简单。一行代码启动websocket服务。
+    基于netty实现websocket服务框架，深度封装使用简单。一行代码完成websocket服务的搭建和启动。
 
     对外暴露接口直接针对业务系统用户进行操作，无需再去管理各种Channel
 
