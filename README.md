@@ -2,7 +2,9 @@
 
 # 项目介绍
 
-    基于netty实现websocket服务框架，深度封装使用简单。一行代码启动websocket服务。对外暴露接口直接针对业务系统用户进行操作，无需再去管理各种Channel
+    基于netty实现websocket服务框架，深度封装使用简单。一行代码启动websocket服务。
+
+    对外暴露接口直接针对业务系统用户进行操作，无需再去管理各种Channel
 
 
 # 使用说明
@@ -135,7 +137,9 @@
 
 ## 项目启动
 
-    源码中的测试包中有开发测试类，可以执行该类启动项目进行调试。开发测试类在test包下 org.oversimplify.test.ChatServerTest
+    源码中的测试包中有开发测试类，可以执行该类启动项目进行调试。
+
+    开发测试类在test包下 org.oversimplify.test.ChatServerTest
 
 ## web端调试
 
