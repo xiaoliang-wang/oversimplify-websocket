@@ -14,7 +14,7 @@ public class ChatServerTest {
 
     public static void main(String[] args) throws Exception {
 
-//        实例化websocket事件处理类
+//        实例化websocket事件处理类，该实现类可以根据业务需要自行实现
         SocketEvent socketEvent = new SocketEventImpl();
 //        启动websocket服务并获取其对外暴露的接口
         final BusinessEvent businessEvent = ChatServer.start(8888, "/wxl",socketEvent);
@@ -24,14 +24,14 @@ public class ChatServerTest {
 //        启动线程，每隔2秒广播一条消息出去。演示通过BusinessEvent如何操作websocket连接
         new Thread(new Runnable() {
             public void run() {
-            while (true){
-                businessEvent.broadcast("websocket连接正常");
-                try {
-                    Thread.sleep(2000L);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                while (true){
+                    businessEvent.broadcast("websocket连接正常");
+                    try {
+                        Thread.sleep(2000L);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
             }
         }).start();
     }
