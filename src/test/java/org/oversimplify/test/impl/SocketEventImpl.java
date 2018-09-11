@@ -1,6 +1,7 @@
 package org.oversimplify.test.impl;
 
 import io.netty.channel.ChannelId;
+import org.oversimplify.enumeration.SendModeEnum;
 import org.oversimplify.event.BusinessEvent;
 import org.oversimplify.event.SocketEvent;
 
@@ -36,5 +37,9 @@ public class SocketEventImpl implements SocketEvent {
     //                收到消息后执行的事件
     public void receiveMessages(final BusinessEvent businessEvent, String userId, String clientType, String msg) {
         businessEvent.sendMsg(userId,"哥们儿，收到消息了。消息内容："+msg );
+    }
+
+    public void sendMessageFuture(SendModeEnum sendType, String userId, String clientType, String msg, boolean success) {
+        System.out.println("发送消息后事件，发送方式："+sendType.getName()+"；接收消息用户："+userId+"；接收消息客户端："+clientType+"；消息内容："+msg+"；发送结果："+success);
     }
 }

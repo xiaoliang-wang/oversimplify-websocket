@@ -27,7 +27,8 @@ import java.util.concurrent.ConcurrentMap;
 public class SecureChatServer extends ChatServer {
     private final SslContext context;
 
-    private SecureChatServer(SslContext context) {
+    private SecureChatServer(SslContext context,SocketEvent socketEvent) {
+        super(socketEvent);
         this.context = context;
     }
 
@@ -48,7 +49,7 @@ public class SecureChatServer extends ChatServer {
         try {
             SelfSignedCertificate cert = new SelfSignedCertificate();
             SslContext context = SslContext.newServerContext(cert.certificate(), cert.privateKey());
-            final SecureChatServer endpoint = new SecureChatServer(context);
+            final SecureChatServer endpoint = new SecureChatServer(context,socketEvent);
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 @Override
                 public void run() {

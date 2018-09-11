@@ -1,6 +1,7 @@
 package org.oversimplify.event;
 
 import io.netty.channel.ChannelId;
+import org.oversimplify.enumeration.SendModeEnum;
 
 /**
  * @author 王晓亮
@@ -48,6 +49,9 @@ public interface SocketEvent {
      * @param msg 消息内容
      */
     void receiveMessages(BusinessEvent businessEvent,String userId, String clientType, String msg);
+
+
+    void sendMessageFuture(SendModeEnum sendType,String userId,String clientType,String msg,boolean success);
 
 
 }

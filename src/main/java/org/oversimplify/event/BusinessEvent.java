@@ -15,7 +15,7 @@ public interface BusinessEvent {
      * @param msg 消息内容
      * @return 是否操作成功
      */
-    boolean sendMsg(String userId, String msg);
+    void sendMsg(String userId, String msg);
 
     /**
      * 向某用户的某种客户端推送消息
@@ -24,14 +24,14 @@ public interface BusinessEvent {
      * @param msg 消息内容
      * @return 是否操作成功
      */
-    boolean sendMsg(String userId,String clientType, String msg);
+    void sendMsg(String userId,String clientType, String msg);
 
     /**
      * 广播消息
      * @param msg 消息内容
      * @return 是否操作成功
      */
-    boolean broadcast(String msg);
+    void broadcast(String msg);
 
     /**
      * 向某种客户端广播消息
@@ -39,14 +39,14 @@ public interface BusinessEvent {
      * @param msg 消息内容
      * @return 是否操作成功
      */
-    boolean broadcast(String clientType,String msg);
+    void broadcast(String clientType,String msg);
 
     /**
      * 断开某个用户的所有连接
      * @param userId 用户唯一标识
      * @return 是否操作成功
      */
-    boolean close(String userId);
+    void close(String userId);
 
     /**
      * 断开某个用户的某种客户端的连接
@@ -54,13 +54,13 @@ public interface BusinessEvent {
      * @param clientType 客户端类型
      * @return 是否操作成功
      */
-    boolean close(String userId,String clientType);
+    void close(String userId,String clientType);
 
     /**
      * 断开指定连接
      * @param channelId 连接通道的唯一标识
      * @return 是否操作成功
      */
-    boolean close(ChannelId channelId);
+    void close(ChannelId channelId);
 
 }

@@ -2,6 +2,8 @@ package org.oversimplify.socket;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
+import io.netty.channel.epoll.EpollDomainSocketChannel;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -52,7 +54,7 @@ public class ChatServer {
     /**
      * 对外暴露的对channel操作的接口
      */
-    private final BusinessEvent businessEvent = new BusinessEventImpl(channelGroup,userChannelMap);
+    private final BusinessEvent businessEvent;
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChatServer.class);
@@ -72,6 +74,7 @@ public class ChatServer {
                 LOGGER.info("websocket服务启动开始，host："+address.toString()+"；url:"+wsPath);
                 try {
                     new ServerBootstrap().group(bossGroup,workGroup)
+//                            .channel(EpollServerSocketChannel.class)
                             .channel(NioServerSocketChannel.class)
                             .option(ChannelOption.SO_BACKLOG, 2048)
                             .option(ChannelOption.TCP_NODELAY, true)
@@ -126,6 +129,10 @@ public class ChatServer {
 
     }
 
+    public ChatServer(SocketEvent socketEvent){
+        this.businessEvent = new BusinessEventImpl(channelGroup,userChannelMap,socketEvent);
+    }
+
     /**
      * 对外暴露的websocket启动方法
      * @param port 服务占用的端口
@@ -134,7 +141,7 @@ public class ChatServer {
      * @return 对外暴露的对channel操作的接口
      */
     public static BusinessEvent start(int port, String wsPath, SocketEvent socketEvent){
-        final ChatServer endpoint = new ChatServer();
+        final ChatServer endpoint = new ChatServer(socketEvent);
 
 //        注册服务停止时的执行钩子
         Runtime.getRuntime().addShutdownHook(new Thread() {
