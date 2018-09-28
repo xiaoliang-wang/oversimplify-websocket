@@ -152,4 +152,12 @@
     url以及参数部分说明：{协议类型}://{host}:{port}/{url}?{token},{clientType}
 
 
+## 模块化
 
+    本项目支持java模块化，需要在module文件中做出如下配置：
+    ```java
+
+        requires websocket.core;
+        requires netty.all;
+
+    ```

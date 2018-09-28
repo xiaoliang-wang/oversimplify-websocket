@@ -11,7 +11,7 @@ import org.oversimplify.websocket.event.SocketEvent;
  */
 public class SocketEventImpl implements SocketEvent {
 
-    //                校验连接请求，返回用户的唯一标识。返回值不为空表示通过校验
+//    校验连接请求，返回用户的唯一标识。返回值不为空表示通过校验
     @Override
     public String getUserIdByParameter(BusinessEvent businessEvent, String token) {
         if(null == token || token.length() == 0){
@@ -20,25 +20,25 @@ public class SocketEventImpl implements SocketEvent {
         return token;
     }
 
-    //                连接建立前执行的事件
+//    连接建立前执行的事件
     @Override
     public void jointBefore(BusinessEvent businessEvent, String userId, ChannelId channelId) {
         System.out.println("连接前事件，用户："+userId);
     }
 
-    //                连接建立后执行的事件
+//    连接建立后执行的事件
     @Override
     public void jointLater(BusinessEvent businessEvent, String userId, ChannelId channelId) {
         System.out.println("连接后事件，用户："+userId);
     }
 
-    //                断开连接后执行的事件
+//    断开连接后执行的事件
     @Override
     public void offLater(BusinessEvent businessEvent, String userId, ChannelId channelId) {
         System.out.println("断开后事件，用户："+userId);
     }
 
-    //                收到消息后执行的事件
+//    收到消息后执行的事件
     @Override
     public void receiveMessages(final BusinessEvent businessEvent, String userId, String clientType, String msg) {
         businessEvent.sendMsg(userId,"哥们儿，收到消息了。消息内容："+msg );
