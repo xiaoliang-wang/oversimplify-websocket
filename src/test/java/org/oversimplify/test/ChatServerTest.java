@@ -6,6 +6,8 @@ import org.oversimplify.event.SocketEvent;
 import org.oversimplify.socket.ChatServer;
 import org.oversimplify.test.impl.SocketEventImpl;
 
+import java.util.HashMap;
+
 /**
  * @author 王晓亮
  * @date 2018/8/30 19:02
@@ -34,6 +36,9 @@ public class ChatServerTest {
                 }
             }
         }).start();
+
+//        String
+//        HashMap
     }
 
 }

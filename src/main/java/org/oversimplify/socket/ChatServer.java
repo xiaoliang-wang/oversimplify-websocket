@@ -72,10 +72,18 @@ public class ChatServer {
         Thread websocketBootstrapThread = new Thread(new Runnable() {
             public void run() {
                 LOGGER.info("websocket服务启动开始，host："+address.toString()+"；url:"+wsPath);
+
+                Class channelClass = null;
+
+                if(System.getProperty("os.name").toLowerCase().indexOf("linux") >= 0){
+                    channelClass = EpollServerSocketChannel.class;
+                }else {
+                    channelClass = NioServerSocketChannel.class;
+                }
+
                 try {
                     new ServerBootstrap().group(bossGroup,workGroup)
-//                            .channel(EpollServerSocketChannel.class)
-                            .channel(NioServerSocketChannel.class)
+                            .channel(channelClass)
                             .option(ChannelOption.SO_BACKLOG, 2048)
                             .option(ChannelOption.TCP_NODELAY, true)
                             .childOption(ChannelOption.SO_KEEPALIVE, true)
