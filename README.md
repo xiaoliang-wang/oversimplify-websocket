@@ -154,10 +154,4 @@
 
 ## 模块化
 
-    本项目支持java模块化，需要在module文件中做出如下配置：
-    ```java
-
-        requires websocket.core;
-        requires netty.all;
-
-    ```
+    本项目支持java模块化，如果在模块化的项目中使用websocket-core模块请参考websocket-test模块的module-info.java
