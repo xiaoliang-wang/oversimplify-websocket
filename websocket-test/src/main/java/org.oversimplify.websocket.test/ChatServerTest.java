@@ -12,6 +12,7 @@ import org.oversimplify.websocket.test.impl.SocketEventImpl;
  */
 public class ChatServerTest {
 
+
     public static void main(String[] args) throws Exception {
 
 //        实例化websocket事件处理类，该实现类可以根据业务需要自行实现
@@ -23,8 +24,10 @@ public class ChatServerTest {
 
 //        启动线程，每隔2秒广播一条消息出去。演示通过BusinessEvent如何操作websocket连接
         new Thread(new Runnable() {
+
             @Override
             public void run() {
+
                 while (true){
                     businessEvent.broadcast("websocket连接正常");
                     try {
@@ -36,8 +39,6 @@ public class ChatServerTest {
             }
         }).start();
 
-//        String
-//        HashMap
     }
 
 }

@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * 扩展ChatServerInitializer以添加加密
  */
+@Deprecated
 public class SecureChatServerInitializer extends ChatServerInitializer {
 
     private final SslContext context;
