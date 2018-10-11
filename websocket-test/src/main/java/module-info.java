@@ -5,4 +5,7 @@
 module websocket.test {
     requires websocket.core;
     requires netty.all;
+    requires org.slf4j;
+    requires websocket.httpclient;
+    requires websocket.threadpool;
 }

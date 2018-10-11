@@ -5,7 +5,7 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
         </filter>
         <encoder>
-            <pattern>%date %boldYellow(%thread) %highlight(%-5level) %boldGreen(%logger{50}:%L) | %msg%n</pattern>
+            <pattern>%date %boldYellow(%thread) %highlight(%-5level) %boldGreen(%logger{50}:%L) --- %msg%n</pattern>
         </encoder>
     </appender>
 

@@ -5,6 +5,8 @@ import org.oversimplify.websocket.event.BusinessEvent;
 import org.oversimplify.websocket.event.SocketEvent;
 import org.oversimplify.websocket.start.ChatServer;
 import org.oversimplify.websocket.test.impl.SocketEventImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 王晓亮
@@ -12,8 +14,12 @@ import org.oversimplify.websocket.test.impl.SocketEventImpl;
  */
 public class ChatServerTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChatServerTest.class);
+
 
     public static void main(String[] args) throws Exception {
+
+
 
 //        实例化websocket事件处理类，该实现类可以根据业务需要自行实现
         SocketEvent socketEvent = new SocketEventImpl();
@@ -28,7 +34,7 @@ public class ChatServerTest {
             @Override
             public void run() {
 
-                while (true){
+                for(;;){
                     businessEvent.broadcast("websocket连接正常");
                     try {
                         Thread.sleep(2000L);
@@ -36,8 +42,11 @@ public class ChatServerTest {
                         e.printStackTrace();
                     }
                 }
+
             }
         }).start();
+
+        LOGGER.info("启动完成");
 
     }
 
