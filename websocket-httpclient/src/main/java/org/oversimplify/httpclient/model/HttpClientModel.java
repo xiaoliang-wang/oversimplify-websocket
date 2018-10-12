@@ -44,7 +44,7 @@ public class HttpClientModel {
         this.hostname = hostname;
     }
 
-    public HttpClientModel(String hostname,Integer port,CloseableHttpClient httpClien,Long lut){
+    public HttpClientModel(String hostname,Integer port,CloseableHttpClient httpClient,Long lut){
         this.hostname = hostname;
         this.port = port;
         this.httpClient = httpClient;

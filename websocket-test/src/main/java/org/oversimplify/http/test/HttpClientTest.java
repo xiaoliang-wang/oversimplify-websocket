@@ -10,13 +10,13 @@ public class HttpClientTest {
             TaskPools.getTaskPoolsImpl().execute(new Runnable() {
                 @Override
                 public void run() {
-                    for (;;){
-                        String ccbuluo = HttpRequester.get("http://test.zht.com/zlxt/api/getVerificationCode?_="
-//                        String ccbuluo = HttpRequester.get("http://wildestlife.ccbuluo.com/api/member/register/getverificationcode?_="
+//                    for (;;){
+//                        String ccbuluo = HttpRequester.get("http://test.zht.com/zlxt/api/getVerificationCode?_="
+                        String ccbuluo = HttpRequester.get("https://wildestlife.ccbuluo.com/api/member/register/getverificationcode?_="
                                 + System.currentTimeMillis()
                         );
                         System.out.println(ccbuluo);
-                    }
+//                    }
                 }
             });
         }
