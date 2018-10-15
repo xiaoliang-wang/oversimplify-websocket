@@ -2,6 +2,7 @@ package org.oversimplify.httpclient.model;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 
+
 public class HttpClientModel {
 
     private CloseableHttpClient httpClient;

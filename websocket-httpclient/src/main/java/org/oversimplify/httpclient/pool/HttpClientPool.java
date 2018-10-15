@@ -50,7 +50,7 @@ public class HttpClientPool {
 
 
     static{
-        ScheduledTaskPools.unpunctualTask(new Runnable() {
+        ScheduledTaskPools.punctualTask(new Runnable() {
             @Override
             public void run() {
                 LOGGER.info("执行清理无效httpclient");
