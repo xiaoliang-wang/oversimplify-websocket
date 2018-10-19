@@ -61,7 +61,7 @@ public class HttpClientPool {
                 LOGGER.info("执行前httpclient数量："+httpClientMap.size());
                 for (Map.Entry<String, HttpClientModel> entry : httpClientMap.entrySet()) {
                     HttpClientModel httpClientModel = entry.getValue();
-                    if(System.currentTimeMillis() - httpClientModel.getLut() < period){
+                    if(System.currentTimeMillis() - httpClientModel.getLut() > period){
                         httpClientMap.remove(entry.getKey());
                     }
                 }
