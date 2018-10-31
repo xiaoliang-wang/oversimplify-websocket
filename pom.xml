@@ -11,8 +11,8 @@
     <modules>
         <module>websocket-core</module>
         <module>websocket-test</module>
-        <module>websocket.threadpool</module>
-        <module>websocket.log</module>
+        <module>websocket-threadpool</module>
+        <module>websocket-log</module>
         <module>websocket-httpclient</module>
     </modules>
 
