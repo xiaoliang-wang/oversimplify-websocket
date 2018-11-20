@@ -151,14 +151,8 @@ public class ChatServer {
      */
     public static BusinessEvent start(int port, String wsPath, SocketEvent socketEvent){
         final ChatServer endpoint = new ChatServer(socketEvent);
-
 //        注册服务停止时的执行钩子
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                endpoint.destroy();
-            }
-        });
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> endpoint.destroy()));
         return endpoint.run(new InetSocketAddress(port),wsPath,socketEvent);
     }
 }

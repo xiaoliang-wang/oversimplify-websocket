@@ -4,7 +4,6 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelId;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import org.oversimplify.websocket.enumeration.SendModeEnum;
 import org.oversimplify.websocket.event.BusinessEvent;
@@ -52,16 +51,13 @@ public class BusinessEventImpl implements BusinessEvent {
                 if(null != channel && channel.isOpen()){
 //                    new TextWebSocketFrame(msg)不能在循环外实例化，否则出问题
                     channel.writeAndFlush(new TextWebSocketFrame(msg)).addListener(
-                        new GenericFutureListener(){
-                            @Override
-                            public void operationComplete(Future future) throws Exception {
+                            (GenericFutureListener) future -> {
                                 if(future.isSuccess()){
                                     socketEvent.sendMessageFuture(null == clientType? SendModeEnum.SEND_BY_USER:SendModeEnum.SEND_BY_USER_AND_CLIENTTYPE,userId ,channelInfo.getClientType() ,msg ,true );
                                 }else {
                                     socketEvent.sendMessageFuture(null == clientType?SendModeEnum.SEND_BY_USER:SendModeEnum.SEND_BY_USER_AND_CLIENTTYPE,userId ,channelInfo.getClientType() ,msg ,false );
                                 }
-                            }
-                        });
+                            });
                 }
 
             }
@@ -74,14 +70,11 @@ public class BusinessEventImpl implements BusinessEvent {
             return;
         }
         channelGroup.writeAndFlush(new TextWebSocketFrame(msg)).addListener(
-                new GenericFutureListener(){
-                    @Override
-                    public void operationComplete(Future future) throws Exception {
-                        if(future.isSuccess()){
-                            socketEvent.sendMessageFuture(SendModeEnum.BROADCAST,null ,null ,msg ,true );
-                        }else {
-                            socketEvent.sendMessageFuture(SendModeEnum.BROADCAST,null ,null ,msg ,false );
-                        }
+                (GenericFutureListener) future -> {
+                    if(future.isSuccess()){
+                        socketEvent.sendMessageFuture(SendModeEnum.BROADCAST,null ,null ,msg ,true );
+                    }else {
+                        socketEvent.sendMessageFuture(SendModeEnum.BROADCAST,null ,null ,msg ,false );
                     }
                 }
 
@@ -102,16 +95,13 @@ public class BusinessEventImpl implements BusinessEvent {
                 if(clientType.equals(channelInfo.getClientType())){
 //                    new TextWebSocketFrame(msg)不能在循环外实例化，否则出问题
                     channelGroup.find(channelInfo.getChannelId()).writeAndFlush(new TextWebSocketFrame(msg)).addListener(
-                        new GenericFutureListener(){
-                            @Override
-                            public void operationComplete(Future future) throws Exception {
+                            (GenericFutureListener) future -> {
                                 if(future.isSuccess()){
                                     socketEvent.sendMessageFuture(SendModeEnum.BROADCAST_CLIENTTYPE,channelInfoList.getKey() ,clientType ,msg ,true );
                                 }else {
                                     socketEvent.sendMessageFuture(SendModeEnum.BROADCAST_CLIENTTYPE,channelInfoList.getKey() ,clientType ,msg ,false );
                                 }
-                            }
-                        });
+                            });
 
                 }
             }

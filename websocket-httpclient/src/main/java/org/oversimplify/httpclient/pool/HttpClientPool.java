@@ -50,23 +50,20 @@ public class HttpClientPool {
 
 
     static{
-        ScheduledTaskPools.punctualTask(new Runnable() {
-            @Override
-            public void run() {
-                LOGGER.info("执行清理无效httpclient");
-                if(httpClientMap.isEmpty()){
-                    LOGGER.info("集合为空，不存在无效httpclient");
-                    return;
-                }
-                LOGGER.info("执行前httpclient数量："+httpClientMap.size());
-                for (Map.Entry<String, HttpClientModel> entry : httpClientMap.entrySet()) {
-                    HttpClientModel httpClientModel = entry.getValue();
-                    if(System.currentTimeMillis() - httpClientModel.getLut() > period){
-                        httpClientMap.remove(entry.getKey());
-                    }
-                }
-                LOGGER.info("执行后httpclient数量："+httpClientMap.size());
+        ScheduledTaskPools.punctualTask(() -> {
+            LOGGER.info("执行清理无效httpclient");
+            if(httpClientMap.isEmpty()){
+                LOGGER.info("集合为空，不存在无效httpclient");
+                return;
             }
+            LOGGER.info("执行前httpclient数量："+httpClientMap.size());
+            for (Map.Entry<String, HttpClientModel> entry : httpClientMap.entrySet()) {
+                HttpClientModel httpClientModel = entry.getValue();
+                if(System.currentTimeMillis() - httpClientModel.getLut() > period){
+                    httpClientMap.remove(entry.getKey());
+                }
+            }
+            LOGGER.info("执行后httpclient数量："+httpClientMap.size());
         },period,period);
     }
 
